@@ -1,0 +1,24 @@
+<mapper namespace="com.tdd.dao.IUserDao">
+
+    <!--sql的唯一标识：namespace.id来组成 ： statementId-->
+    <select id="findAll" resultType="com.tdd.pojo.User" >
+        select * from user
+    </select>
+
+    <select id="selectOne" resultType="com.tdd.pojo.User" paramterType="com.tdd.pojo.User">
+        select * from user where id = #{id} and username = #{username}
+    </select>
+
+    <insert id="create" paramterType="com.tdd.pojo.User" resultType="java.lang.Integer">
+        insert into user values(#{id},#{username},#{password},#{birthday})
+    </insert>
+
+    <update id="update"  paramterType="com.tdd.pojo.User" resultType="java.lang.Integer">
+        update user set username=#{username},`password`=#{password},birthday=#{birthday} where id=#{id}
+    </update>
+
+    <delete id="delete" paramterType="com.tdd.pojo.User" resultType="java.lang.Integer">
+        delete from user where id=#{id}
+    </delete>
+
+</mapper>
