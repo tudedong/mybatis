@@ -59,8 +59,8 @@ public class IPersistenceTest {
     @Test
     public void testCreate(){
         User user = new User();
-        user.setId(5);
-        user.setUsername("tutu1");
+        user.setId(7);
+        user.setUsername("tutu7");
         user.setPassword("123");
         user.setBirthday("2020-4-25");
         //5.代理对象调用接口中的任意方法，执行的都是动态代理中的invoke方法

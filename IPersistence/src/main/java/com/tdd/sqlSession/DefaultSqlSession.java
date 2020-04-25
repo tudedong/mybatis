@@ -25,7 +25,7 @@ public class DefaultSqlSession implements SqlSession {
     public <E> List<E> selectList(String statementId, Object... params) throws Exception {
 
         //将要去完成对simpleExecutor里的query方法的调用
-        simpleExecutor simpleExecutor = new simpleExecutor();
+        SimpleExecutor simpleExecutor = new SimpleExecutor();
         MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);
         List<Object> list = simpleExecutor.query(configuration, mappedStatement, params);
 
@@ -51,7 +51,7 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public int update(String statementId, Object... params) throws Exception {
         //将要去完成对simpleExecutor里的update方法的调用
-        simpleExecutor simpleExecutor = new simpleExecutor();
+        SimpleExecutor simpleExecutor = new SimpleExecutor();
         MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);
         int count = simpleExecutor.update(configuration, mappedStatement, params);
         return count;

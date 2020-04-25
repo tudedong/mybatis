@@ -22,7 +22,7 @@ import java.util.List;
  * @description
  * @date 2020-04-21 23:11:03
  */
-public class simpleExecutor implements Executor {
+public class SimpleExecutor implements Executor {
 
     @Override
     public <E> List<E> query(Configuration configuration, MappedStatement mappedStatement, Object... params) throws Exception {
