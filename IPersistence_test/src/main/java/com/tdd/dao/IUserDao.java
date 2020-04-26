@@ -17,6 +17,13 @@ public interface IUserDao {
     List<User> findAll();
 
     /**
+     * 查询单个user
+     * @param user
+     * @return
+     */
+    User selectOne(User user);
+
+    /**
      * 创建user
      */
     int create(User user);
@@ -29,9 +36,9 @@ public interface IUserDao {
     int update(User user);
 
     /**
-     * 删除user
-     * @param user
+     * 根据id删除user
+     * @param id
      * @return
      */
-    int delete(User user);
+    int delete(long id);
 }

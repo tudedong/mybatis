@@ -34,33 +34,43 @@ public class IPersistenceTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsSteam);
 
         //3.利用工厂模式生产了DefaultSqlsession实例对象
-        //   设置了事务不自动提交  完成了executor对象的创建
         sqlSession = sqlSessionFactory.openSession();
 
         //4.使用JDK动态代理对mapper接口产生代理对象
         userDao = sqlSession.getMapper(IUserDao.class);
     }
     /**
-     * 测试查询
+     * 测试查询全部
      */
     @Test
-    public void testSelect(){
+    public void testSelectList(){
         //查询全部user信息
         List<User> all = userDao.findAll();
-        for (User user1 : all) {
-            System.out.println(user1);
+        for (User user : all) {
+            System.out.println(user);
         }
-
     }
 
+    /**
+     * 测试查询单个
+     */
+    @Test
+    public void testSelectOne(){
+        //查询全部user信息
+        User user = new User();
+        user.setId(2);
+        user.setUsername("tom");
+        User one = userDao.selectOne(user);
+        System.out.println(one);
+    }
     /**
      * 测试创建
      */
     @Test
     public void testCreate(){
         User user = new User();
-        user.setId(7);
-        user.setUsername("tutu7");
+        user.setId(3);
+        user.setUsername("tutu");
         user.setPassword("123");
         user.setBirthday("2020-4-25");
         //5.代理对象调用接口中的任意方法，执行的都是动态代理中的invoke方法
@@ -75,7 +85,7 @@ public class IPersistenceTest {
     public void testUpdate(){
         User user = new User();
         user.setId(3);
-        user.setUsername("tutu1");
+        user.setUsername("tutu3");
         user.setPassword("123");
         user.setBirthday("2020-4-25");
         int result = userDao.update(user);
@@ -87,9 +97,7 @@ public class IPersistenceTest {
      */
     @Test
     public void testDelete(){
-        User user = new User();
-        user.setId(3);
-        int result = userDao.delete(user);
+        int result = userDao.delete(3);
         System.out.println(result);
     }
 

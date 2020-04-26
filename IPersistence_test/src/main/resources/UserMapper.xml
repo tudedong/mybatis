@@ -5,19 +5,23 @@
         select * from user
     </select>
 
-    <select id="selectOne" resultType="com.tdd.pojo.User" paramterType="com.tdd.pojo.User">
+    <!--查询单个user-->
+    <select id="selectOne" paramterType="com.tdd.pojo.User" resultType="com.tdd.pojo.User">
         select * from user where id = #{id} and username = #{username}
     </select>
 
+    <!--创建user-->
     <insert id="create" paramterType="com.tdd.pojo.User" resultType="java.lang.Integer">
         insert into user values(#{id},#{username},#{password},#{birthday})
     </insert>
 
+    <!--更新user-->
     <update id="update"  paramterType="com.tdd.pojo.User" resultType="java.lang.Integer">
         update user set username=#{username},`password`=#{password},birthday=#{birthday} where id=#{id}
     </update>
 
-    <delete id="delete" paramterType="com.tdd.pojo.User" resultType="java.lang.Integer">
+    <!--根据id删除user-->
+    <delete id="delete" paramterType="java.lang.Integer" resultType="java.lang.Integer">
         delete from user where id=#{id}
     </delete>
 

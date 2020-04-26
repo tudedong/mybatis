@@ -6,8 +6,6 @@ import com.tdd.pojo.MappedStatement;
 import java.lang.reflect.*;
 import java.util.List;
 
-
-
 /**
  * @author tudedong
  * @description
@@ -24,7 +22,7 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public <E> List<E> selectList(String statementId, Object... params) throws Exception {
 
-        //将要去完成对simpleExecutor里的query方法的调用
+        //将要去完成对SimpleExecutor里的query方法的调用
         SimpleExecutor simpleExecutor = new SimpleExecutor();
         MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);
         List<Object> list = simpleExecutor.query(configuration, mappedStatement, params);
@@ -50,7 +48,7 @@ public class DefaultSqlSession implements SqlSession {
 
     @Override
     public int update(String statementId, Object... params) throws Exception {
-        //将要去完成对simpleExecutor里的update方法的调用
+        //将要去完成对SimpleExecutor里的update方法的调用
         SimpleExecutor simpleExecutor = new SimpleExecutor();
         MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);
         int count = simpleExecutor.update(configuration, mappedStatement, params);
@@ -78,6 +76,7 @@ public class DefaultSqlSession implements SqlSession {
                 String statementId = className+"."+methodName;
 
                 // 准备参数2：params:args
+                //sql类型 SELECT UPDATE DELETE INSERT
                 String sqlType = configuration.getMappedStatementMap().get(statementId).getSqlType();
                 Object result = null;
                 switch (sqlType) {
@@ -87,6 +86,8 @@ public class DefaultSqlSession implements SqlSession {
                         // 判断是否进行了 泛型类型参数化
                         if (genericReturnType instanceof ParameterizedType) {
                             result = selectList(statementId, args);
+                        }else{
+                            result = selectOne(statementId,args);
                         }
                         break;
                     }
